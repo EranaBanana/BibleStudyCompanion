@@ -74,7 +74,7 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font-body);background:var(--parchment);background-color:#fdf8f0;color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;transition:background .3s,color .3s;-webkit-text-size-adjust:100%}
 button{font-family:var(--font-body);cursor:pointer;border:none;outline:none;transition:all .18s}
-input,textarea,select{font-family:var(--font-body);font-size:.9rem;border:1.5px solid rgba(44,36,22,.15);border-radius:var(--radius-sm);padding:9px 12px;background:var(--ivory);color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s;width:100%}
+input,textarea,select{font-family:var(--font-body);font-size:1rem;border:1.5px solid rgba(44,36,22,.15);border-radius:var(--radius-sm);padding:9px 12px;background:var(--ivory);color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s;width:100%}
 input:focus,textarea:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,154,60,.15)}
 textarea{resize:vertical;min-height:90px;line-height:1.7}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b5f4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
@@ -101,7 +101,7 @@ h1,h2,h3{font-family:var(--font-serif)}
    NAV
 ════════════════════════════════════════════════ */
 .nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:-webkit-sticky;position:sticky;top:var(--nav-h);z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
-.nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 20px}
+.nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 20px;-webkit-overflow-scrolling:touch}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{background:none;border:none;border-bottom:3px solid transparent;padding:14px 18px;font-size:.82rem;font-weight:500;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .18s;position:relative}
 .nav-tab:hover{color:var(--ink);border-bottom-color:var(--gold-l)}
@@ -341,13 +341,127 @@ main{max-width:1180px;margin:0 auto;padding:32px 24px calc(80px + env(safe-area-
 .empty-icon{font-size:2.5rem;margin-bottom:10px;opacity:.5}
 .empty-state p{font-style:italic;font-size:.9rem}
 
+/* ════════════════════════════════════════════════
+   RESPONSIVE — TABLET  (≤900px)
+════════════════════════════════════════════════ */
+@media(max-width:900px){
+  main{padding:24px 18px calc(60px + env(safe-area-inset-bottom))}
+  .section-title{font-size:1.7rem}
+  .summary-cards{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .verse-list{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .alert-grid{grid-template-columns:1fr}
+  .form-grid.cols-3{grid-template-columns:repeat(2,1fr)}
+  .header-name-input{width:130px}
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE — PHONE  (≤640px)
+════════════════════════════════════════════════ */
 @media(max-width:640px){
-  .form-grid.cols-2,.form-grid.cols-3{grid-template-columns:1fr}
-  .form-field.span-2{grid-column:span 1}
-  .books-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
-  .chapter-grid{grid-template-columns:repeat(6,1fr)}
-  .section-title{font-size:1.5rem}
-  .verse-list{grid-template-columns:1fr}
+
+  /* ── Header ── */
+  .app-header{padding:0 14px;height:auto;min-height:54px;flex-wrap:wrap;gap:8px;padding-top:10px;padding-bottom:10px}
+  .brand-text{font-size:1rem}
+  .brand-sub{display:none}
+  .header-name-input{width:110px;font-size:.78rem}
+  .theme-btn{font-size:.7rem;padding:4px 8px}
+  #theme-label{display:none} /* show icon only on phone */
+
+  /* ── Nav tabs — scrollable, icon + short label ── */
+  .nav-wrapper{top:54px} /* adjust sticky offset to match compressed header */
+  .nav-tabs{padding:0 8px;gap:0}
+  .nav-tab{padding:12px 11px;font-size:.74rem;gap:4px;letter-spacing:0}
+  .tab-icon{font-size:.9rem}
+
+  /* ── Main content ── */
+  main{padding:18px 14px calc(60px + env(safe-area-inset-bottom))}
+  .section-eyebrow{font-size:.62rem}
+  .section-title{font-size:1.4rem;margin-bottom:8px}
+  .section-desc{font-size:.87rem;margin-bottom:20px}
+  .section-divider{margin:22px 0 14px;font-size:.66rem}
+
+  /* ── Stat cards — 2-col on phone ── */
+  .summary-cards{grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:20px}
+  .stat-card{padding:14px 12px}
+  .stat-value{font-size:1.7rem}
+  .stat-sub{font-size:.7rem}
+
+  /* ── Forms ── */
+  .form-card{padding:16px 14px}
+  .form-grid,.form-grid.cols-2,.form-grid.cols-3{grid-template-columns:1fr;gap:12px}
+  .form-field.span-2,.form-field.span-full{grid-column:span 1}
+  .btn-primary{width:100%;justify-content:center;padding:12px 20px;font-size:.88rem}
+  .btn-secondary{width:100%;justify-content:center;text-align:center}
+  input,textarea,select{font-size:1rem} /* prevent iOS auto-zoom on focus (needs ≥16px) */
+
+  /* ── Reading tracker ── */
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px}
+  .book-card{padding:10px 11px}
+  .book-name{font-size:.8rem}
+  .book-chapters{font-size:.65rem}
+  .testament-label{font-size:1.1rem;margin:18px 0 10px}
+
+  /* ── Chapter modal ── */
+  .chapter-modal{padding:20px 16px;width:95%}
+  .chapter-grid{grid-template-columns:repeat(6,1fr);gap:5px}
+  .ch-btn{padding:8px 0;font-size:.78rem;min-height:36px}
+  .modal-actions{flex-direction:column}
+  .modal-actions button{width:100%;justify-content:center}
+
+  /* ── Study method tabs — scroll horizontally ── */
+  .method-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .method-tabs::-webkit-scrollbar{display:none}
+  .method-tab{white-space:nowrap;flex-shrink:0}
+  .method-fields{padding:15px 14px}
+
+  /* ── Prayer & sermon cards ── */
+  .prayer-card,.sermon-card,.session-card{padding:14px 14px}
+  .prayer-card-header,.sermon-card-header{flex-wrap:wrap;gap:6px}
+  .prayer-actions,.sermon-actions{flex-wrap:wrap;gap:5px}
+
+  /* ── Verse list — single column ── */
+  .verse-list{grid-template-columns:1fr;gap:11px}
+  .verse-card{padding:16px 15px}
+  .verse-delete{opacity:1} /* always visible on touch — no hover */
+
+  /* ── Alerts ── */
+  .alert-grid{grid-template-columns:1fr}
+  .alert-card{padding:12px 13px}
+
+  /* ── Heatmap ── */
+  .heatmap-container{padding:15px 14px}
+  .heatmap-cell{width:11px;height:11px}
+
+  /* ── Footer ── */
+  .site-footer{padding:20px 14px;margin-top:40px}
+  .footer-actions{gap:7px}
+  .btn-footer{padding:7px 12px;font-size:.74rem}
+
+  /* ── Toast — bottom of screen, full width on phone ── */
+  .save-toast{left:14px;right:14px;bottom:14px;text-align:center}
+
+  /* ── Modals ── */
+  .modal-box{padding:22px 18px;width:94%}
+  .modal-actions{flex-direction:column}
+  .btn-modal-cancel,.btn-modal-danger{width:100%;text-align:center}
+
+  /* ── FAQ ── */
+  .faq-q{font-size:.84rem;padding:13px 14px}
+  .faq-a{padding:0 14px 12px;font-size:.82rem}
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE — SMALL PHONE  (≤380px)
+════════════════════════════════════════════════ */
+@media(max-width:380px){
+  .summary-cards{grid-template-columns:1fr 1fr}
+  .stat-value{font-size:1.5rem}
+  .nav-tab{padding:11px 8px;font-size:.68rem}
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
+  .chapter-grid{grid-template-columns:repeat(5,1fr)}
+  .section-title{font-size:1.25rem}
+  .header-name-input{width:90px}
 }
 </style>
 </head>
@@ -1658,4 +1772,3 @@ document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
-
