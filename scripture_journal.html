@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scripture Journal ✦ Erana Banana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════
+   ROOT & THEME TOKENS
+════════════════════════════════════════════════ */
+:root {
+  --ink:       #2c2416;
+  --ink-soft:  #6b5f4a;
+  --ink-light: #a09278;
+  --parchment: #fdf8f0;
+  --cream:     #f7f1e6;
+  --ivory:     #fefbf5;
+  --gold:      #c49a3c;
+  --gold-d:    #a07828;
+  --gold-l:    #e8d48a;
+  --gold-bg:   #fdf5dc;
+  --sage:      #7a9e7e;
+  --sage-d:    #527856;
+  --sage-l:    #b8d4bc;
+  --sage-bg:   #edf6ee;
+  --wine:      #8b3a52;
+  --wine-d:    #6b2a3c;
+  --wine-bg:   #f9edf1;
+  --blue:      #4a6fa5;
+  --blue-d:    #2d4f80;
+  --blue-bg:   #edf2fb;
+  --shadow:    0 2px 16px rgba(44,36,22,.08);
+  --shadow-md: 0 4px 24px rgba(44,36,22,.12);
+  --radius:    14px;
+  --radius-sm: 8px;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body:  'Inter', system-ui, sans-serif;
+  --nav-h: 60px;
+}
+/* Dark theme */
+[data-theme="dark"] {
+  --ink: #e8dfc8; --ink-soft: #b8a888; --ink-light: #7a6e58;
+  --parchment: #1a1510; --cream: #221e16; --ivory: #1e1a12;
+  --gold: #d4aa4c; --gold-d: #b88c2c; --gold-l: #e8c870; --gold-bg: #2a2010;
+  --sage: #8aae8e; --sage-d: #6a8e6e; --sage-l: #5a7e5e; --sage-bg: #152018;
+  --wine: #c06070; --wine-d: #a04858; --wine-bg: #200e14;
+  --blue: #6a8fc5; --blue-d: #4a6fa5; --blue-bg: #0e1528;
+  --shadow: 0 2px 16px rgba(0,0,0,.3); --shadow-md: 0 4px 24px rgba(0,0,0,.4);
+}
+/* Sepia theme */
+[data-theme="sepia"] {
+  --ink: #3d2e1a; --ink-soft: #7a6040; --parchment: #f5e6c8;
+  --cream: #eddeba; --ivory: #f9f0d8; --gold: #b8882c;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;transition:background .3s,color .3s}
+button{font-family:var(--font-body);cursor:pointer;border:none;outline:none;transition:all .18s}
+input,textarea,select{font-family:var(--font-body);font-size:.9rem;border:1.5px solid rgba(44,36,22,.15);border-radius:var(--radius-sm);padding:9px 12px;background:var(--ivory);color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s;width:100%}
+input:focus,textarea:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,154,60,.15)}
+textarea{resize:vertical;min-height:90px;line-height:1.7}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b5f4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+label{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);margin-bottom:5px}
+h1,h2,h3{font-family:var(--font-serif)}
+
+/* ════════════════════════════════════════════════
+   LAYOUT
+════════════════════════════════════════════════ */
+.app-header{background:linear-gradient(135deg,#2c2416 0%,#3d3020 40%,#4a3a28 100%);color:#f5e8c8;padding:0 28px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.header-brand{display:flex;align-items:center;gap:14px}
+.brand-icon{font-size:1.4rem}
+.brand-text{font-family:var(--font-serif);font-size:1.15rem;font-weight:500;letter-spacing:.02em}
+.brand-sub{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-top:-2px}
+.header-meta{display:flex;align-items:center;gap:12px}
+.header-name-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#f5e8c8;font-size:.82rem;padding:5px 10px;width:160px}
+.header-name-input::placeholder{color:rgba(245,232,200,.4)}
+.theme-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;color:#f5e8c8;padding:5px 10px;font-size:.75rem;display:flex;align-items:center;gap:6px}
+.theme-btn:hover{background:rgba(255,255,255,.2)}
+.countdown-ribbon{background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d));color:#fff;text-align:center;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:5px 16px;font-weight:600}
+.countdown-ribbon:empty{display:none}
+
+/* ════════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════════ */
+.nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:sticky;top:var(--nav-h);z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
+.nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 20px}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{background:none;border:none;border-bottom:3px solid transparent;padding:14px 18px;font-size:.82rem;font-weight:500;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .18s;position:relative}
+.nav-tab:hover{color:var(--ink);border-bottom-color:var(--gold-l)}
+.nav-tab.active{color:var(--gold-d);border-bottom-color:var(--gold);font-weight:600}
+.tab-icon{font-size:.95rem}
+.alert-dot{position:absolute;top:10px;right:10px;width:7px;height:7px;border-radius:50%;background:#e05050;border:1.5px solid var(--cream)}
+
+/* ════════════════════════════════════════════════
+   PANELS
+════════════════════════════════════════════════ */
+main{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+.panel{display:none;animation:fadeIn .22s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.section-eyebrow{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-d);font-weight:600;margin-bottom:8px}
+.section-title{font-family:var(--font-serif);font-size:2rem;font-weight:400;margin-bottom:10px;color:var(--ink);line-height:1.25}
+.section-title em{font-style:italic;color:var(--gold-d)}
+.section-desc{color:var(--ink-soft);font-size:.92rem;max-width:640px;line-height:1.7;margin-bottom:28px}
+.section-divider{display:flex;align-items:center;gap:12px;margin:32px 0 20px;color:var(--ink-light);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:rgba(44,36,22,.12)}
+
+/* ════════════════════════════════════════════════
+   CARDS & SUMMARY BLOCKS
+════════════════════════════════════════════════ */
+.summary-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:28px}
+.stat-card{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);text-align:center}
+.stat-card.gold{background:var(--gold-bg);border-color:rgba(196,154,60,.25)}
+.stat-card.sage{background:var(--sage-bg);border-color:rgba(122,158,126,.25)}
+.stat-card.wine{background:var(--wine-bg);border-color:rgba(139,58,82,.25)}
+.stat-card.blue{background:var(--blue-bg);border-color:rgba(74,111,165,.25)}
+.stat-label{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-light);margin-bottom:6px}
+.stat-value{font-family:var(--font-serif);font-size:2rem;font-weight:500;color:var(--ink);line-height:1.1}
+.stat-card.gold .stat-value{color:var(--gold-d)}
+.stat-card.sage .stat-value{color:var(--sage-d)}
+.stat-card.wine .stat-value{color:var(--wine-d)}
+.stat-card.blue .stat-value{color:var(--blue-d)}
+.stat-sub{font-size:.76rem;color:var(--ink-light);margin-top:4px}
+.progress-bar{height:5px;background:rgba(44,36,22,.1);border-radius:99px;margin-top:8px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-d));border-radius:99px;transition:width .5s ease}
+
+/* ════════════════════════════════════════════════
+   FORMS
+════════════════════════════════════════════════ */
+.form-card{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);margin-bottom:24px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.form-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.form-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.form-field{display:flex;flex-direction:column}
+.form-field.span-2{grid-column:span 2}
+.form-field.span-full{grid-column:1/-1}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:white;border-radius:var(--radius-sm);padding:10px 22px;font-weight:600;font-size:.87rem;letter-spacing:.03em;box-shadow:0 2px 8px rgba(196,154,60,.3);display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(196,154,60,.4)}
+.btn-secondary{background:var(--cream);border:1.5px solid rgba(44,36,22,.15);color:var(--ink-soft);border-radius:var(--radius-sm);padding:9px 18px;font-size:.84rem;font-weight:500}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold-d)}
+.btn-delete{background:none;border:none;color:var(--ink-light);font-size:1rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.btn-delete:hover{background:var(--wine-bg);color:var(--wine-d)}
+
+/* ════════════════════════════════════════════════
+   READING TRACKER — book grid
+════════════════════════════════════════════════ */
+.testament-label{font-family:var(--font-serif);font-size:1.3rem;font-style:italic;color:var(--ink);margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(44,36,22,.12)}
+.section-group-label{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--ink-light);margin:16px 0 8px}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:8px}
+.book-card{background:var(--ivory);border:1.5px solid rgba(44,36,22,.1);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .18s;position:relative;user-select:none}
+.book-card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(196,154,60,.15)}
+.book-card.started{border-color:var(--gold-l);background:var(--gold-bg)}
+.book-card.complete{border-color:var(--sage);background:var(--sage-bg)}
+.book-name{font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.book-chapters{font-size:.7rem;color:var(--ink-light)}
+.book-progress-bar{height:3px;background:rgba(44,36,22,.1);border-radius:99px;margin-top:7px;overflow:hidden}
+.book-progress-fill{height:100%;border-radius:99px;transition:width .3s}
+.book-card.complete .book-progress-fill{background:var(--sage-d)}
+.book-card.started .book-progress-fill{background:var(--gold-d)}
+.book-card.unread .book-progress-fill{background:rgba(44,36,22,.15)}
+.book-check{position:absolute;top:8px;right:8px;font-size:.8rem;color:var(--sage-d)}
+/* Chapter modal */
+.chapter-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.chapter-modal-overlay.open{display:flex}
+.chapter-modal{background:var(--ivory);border-radius:var(--radius);padding:28px;max-width:480px;width:90%;box-shadow:var(--shadow-md);max-height:85vh;overflow-y:auto}
+.chapter-modal-title{font-family:var(--font-serif);font-size:1.4rem;margin-bottom:6px}
+.chapter-modal-sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:20px}
+.chapter-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:20px}
+.ch-btn{padding:7px 0;border-radius:6px;font-size:.8rem;font-weight:500;background:var(--cream);border:1.5px solid rgba(44,36,22,.1);color:var(--ink-soft);transition:all .15s;text-align:center}
+.ch-btn.read{background:var(--sage-bg);border-color:var(--sage);color:var(--sage-d);font-weight:600}
+.ch-btn:hover{border-color:var(--gold);color:var(--gold-d)}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* ════════════════════════════════════════════════
+   STUDY SESSIONS
+════════════════════════════════════════════════ */
+.method-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.method-tab{padding:7px 16px;border-radius:99px;font-size:.8rem;font-weight:500;border:1.5px solid rgba(44,36,22,.15);background:var(--ivory);color:var(--ink-soft);transition:all .18s;cursor:pointer}
+.method-tab.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold-d);font-weight:600}
+.method-fields{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.method-desc{font-size:.82rem;color:var(--ink-soft);font-style:italic;margin-bottom:16px;padding:10px 14px;background:var(--gold-bg);border-radius:6px;border-left:3px solid var(--gold)}
+.session-list{display:flex;flex-direction:column;gap:12px}
+.session-item{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius-sm);padding:16px 18px;display:flex;gap:16px;align-items:flex-start;box-shadow:var(--shadow);transition:border-color .18s}
+.session-item:hover{border-color:var(--gold-l)}
+.session-date{font-size:.72rem;color:var(--ink-light);white-space:nowrap;min-width:80px;padding-top:2px}
+.session-body{flex:1;min-width:0}
+.session-method-badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.66rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.badge-soap{background:var(--gold-bg);color:var(--gold-d);border:1px solid var(--gold-l)}
+.badge-verse{background:var(--blue-bg);color:var(--blue-d);border:1px solid rgba(74,111,165,.3)}
+.badge-topical{background:var(--wine-bg);color:var(--wine-d);border:1px solid rgba(139,58,82,.3)}
+.badge-book{background:var(--sage-bg);color:var(--sage-d);border:1px solid var(--sage-l)}
+.badge-chapter{background:var(--cream);color:var(--ink-soft);border:1px solid rgba(44,36,22,.15)}
+.badge-word{background:rgba(74,111,165,.08);color:var(--blue-d);border:1px solid rgba(74,111,165,.2)}
+.badge-devotional{background:var(--wine-bg);color:var(--wine-d);border:1px solid rgba(139,58,82,.2)}
+.badge-biographical{background:var(--sage-bg);color:var(--sage-d);border:1px solid rgba(122,158,126,.3)}
+.session-passage{font-weight:600;font-size:.92rem;margin-bottom:4px;color:var(--ink)}
+.session-preview{font-size:.83rem;color:var(--ink-soft);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+
+/* ════════════════════════════════════════════════
+   SERMON NOTES
+════════════════════════════════════════════════ */
+.sermon-list{display:flex;flex-direction:column;gap:12px}
+.sermon-item{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius-sm);padding:16px 20px;box-shadow:var(--shadow);cursor:pointer;transition:all .18s}
+.sermon-item:hover{border-color:var(--gold-l);box-shadow:var(--shadow-md)}
+.sermon-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.sermon-title{font-family:var(--font-serif);font-size:1.05rem;font-weight:500;color:var(--ink)}
+.sermon-meta{font-size:.76rem;color:var(--ink-soft);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
+.sermon-meta span::before{content:'· ';color:var(--ink-light)}
+.sermon-meta span:first-child::before{content:''}
+.sermon-expand{display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(44,36,22,.1)}
+.sermon-item.open .sermon-expand{display:block}
+.sermon-field-label{font-size:.67rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--gold-d);margin-bottom:4px;margin-top:12px}
+.sermon-field-label:first-child{margin-top:0}
+.sermon-field-value{font-size:.87rem;color:var(--ink);white-space:pre-wrap;line-height:1.7}
+
+/* ════════════════════════════════════════════════
+   PRAYER LOG
+════════════════════════════════════════════════ */
+.prayer-tabs{display:flex;gap:0;border-bottom:2px solid rgba(44,36,22,.1);margin-bottom:20px}
+.prayer-tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 20px;font-size:.84rem;font-weight:500;color:var(--ink-soft);margin-bottom:-2px;transition:all .18s}
+.prayer-tab-btn.active{color:var(--gold-d);border-bottom-color:var(--gold);font-weight:600}
+.prayer-list{display:flex;flex-direction:column;gap:10px}
+.prayer-item{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius-sm);padding:14px 16px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow);transition:all .18s}
+.prayer-item:hover{border-color:var(--gold-l)}
+.prayer-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-active{background:var(--gold)}
+.dot-answered{background:var(--sage)}
+.dot-ongoing{background:var(--blue)}
+.prayer-body{flex:1;min-width:0}
+.prayer-person{font-weight:600;font-size:.9rem;color:var(--ink)}
+.prayer-request{font-size:.84rem;color:var(--ink-soft);margin-top:3px;line-height:1.6}
+.prayer-date{font-size:.72rem;color:var(--ink-light);margin-top:4px}
+.prayer-answered-note{font-size:.8rem;color:var(--sage-d);margin-top:6px;font-style:italic;padding:6px 10px;background:var(--sage-bg);border-radius:4px}
+.prayer-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.prayer-action-btn{background:none;border:1px solid rgba(44,36,22,.15);border-radius:6px;padding:4px 10px;font-size:.72rem;color:var(--ink-soft);transition:all .15s}
+.prayer-action-btn:hover{border-color:var(--gold);color:var(--gold-d)}
+.prayer-action-btn.answered{border-color:var(--sage);color:var(--sage-d);background:var(--sage-bg)}
+
+/* ════════════════════════════════════════════════
+   FAVOURITE VERSES
+════════════════════════════════════════════════ */
+.verse-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.verse-card{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);transition:all .18s;position:relative}
+.verse-card:hover{border-color:var(--gold-l);box-shadow:var(--shadow-md)}
+.verse-reference{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--gold-d);margin-bottom:8px}
+.verse-text{font-family:var(--font-serif);font-size:.95rem;font-style:italic;color:var(--ink);line-height:1.75;margin-bottom:10px}
+.verse-reflection{font-size:.8rem;color:var(--ink-soft);line-height:1.6;border-top:1px solid rgba(44,36,22,.08);padding-top:8px;margin-top:8px}
+.verse-tag{display:inline-block;padding:2px 8px;background:var(--gold-bg);border:1px solid var(--gold-l);border-radius:99px;font-size:.67rem;font-weight:500;color:var(--gold-d);margin-right:4px;margin-top:6px}
+.verse-delete{position:absolute;top:10px;right:10px;opacity:0;transition:opacity .18s}
+.verse-card:hover .verse-delete{opacity:1}
+
+/* ════════════════════════════════════════════════
+   DASHBOARD ALERTS
+════════════════════════════════════════════════ */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:8px}
+.alert-card{border-radius:var(--radius-sm);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}
+.alert-card.info{background:var(--blue-bg);border:1px solid rgba(74,111,165,.2)}
+.alert-card.warn{background:var(--gold-bg);border:1px solid rgba(196,154,60,.25)}
+.alert-card.success{background:var(--sage-bg);border:1px solid rgba(122,158,126,.3)}
+.alert-icon{font-size:1.3rem;flex-shrink:0}
+.alert-body{flex:1;min-width:0}
+.alert-title{font-weight:600;font-size:.87rem;color:var(--ink);margin-bottom:2px}
+.alert-desc{font-size:.78rem;color:var(--ink-soft);line-height:1.5}
+.alert-action{font-size:.74rem;font-weight:600;color:var(--gold-d);background:none;border:none;padding:0;margin-top:5px;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(196,154,60,.3);text-underline-offset:2px}
+.alert-action:hover{color:var(--gold)}
+.all-good{text-align:center;padding:40px 20px;color:var(--ink-soft)}
+.all-good-icon{font-size:2.5rem;margin-bottom:10px}
+.all-good p{font-family:var(--font-serif);font-size:1.1rem;font-style:italic;color:var(--sage-d)}
+
+/* Reading heatmap */
+.heatmap-container{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:24px}
+.heatmap-title{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);margin-bottom:12px}
+.heatmap-grid{display:flex;gap:3px;flex-wrap:wrap}
+.heatmap-cell{width:14px;height:14px;border-radius:3px;background:rgba(44,36,22,.08);transition:all .15s;cursor:default}
+.heatmap-cell.level-1{background:var(--gold-l)}
+.heatmap-cell.level-2{background:var(--gold)}
+.heatmap-cell.level-3{background:var(--gold-d)}
+.heatmap-cell.level-4{background:var(--sage)}
+.heatmap-legend{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:.72rem;color:var(--ink-light)}
+.heatmap-legend-cell{width:12px;height:12px;border-radius:2px}
+
+/* ════════════════════════════════════════════════
+   TOAST & MODALS
+════════════════════════════════════════════════ */
+.save-toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#f5e8c8;padding:10px 18px;border-radius:var(--radius-sm);font-size:.8rem;font-weight:500;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:9999;box-shadow:var(--shadow-md)}
+.save-toast.show{opacity:1;transform:translateY(0)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--ivory);border-radius:var(--radius);padding:32px;max-width:400px;width:90%;box-shadow:var(--shadow-md)}
+.modal-icon{font-size:2rem;text-align:center;margin-bottom:12px}
+.modal-title{font-family:var(--font-serif);font-size:1.3rem;text-align:center;margin-bottom:8px}
+.modal-desc{font-size:.87rem;color:var(--ink-soft);text-align:center;line-height:1.6;margin-bottom:16px}
+.modal-input{margin-bottom:14px}
+.modal-actions{display:flex;gap:10px;justify-content:center}
+.btn-modal-cancel{background:var(--cream);border:1.5px solid rgba(44,36,22,.15);color:var(--ink-soft);border-radius:var(--radius-sm);padding:9px 20px;font-size:.84rem}
+.btn-modal-danger{background:var(--wine);color:white;border-radius:var(--radius-sm);padding:9px 20px;font-size:.84rem;font-weight:600}
+.btn-modal-danger:disabled{opacity:.4;cursor:not-allowed}
+
+/* ════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════ */
+.site-footer{background:linear-gradient(135deg,#2c2416,#3d3020);color:rgba(245,232,200,.7);text-align:center;padding:28px 20px;margin-top:60px}
+.footer-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.btn-footer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(245,232,200,.9);border-radius:var(--radius-sm);padding:8px 16px;font-size:.78rem;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:all .18s}
+.btn-footer:hover{background:rgba(255,255,255,.2);color:#f5e8c8}
+.btn-footer-danger{border-color:rgba(220,100,100,.4);color:rgba(220,180,180,.9)}
+.btn-footer-danger:hover{background:rgba(220,100,100,.2)}
+.footer-tagline{font-family:var(--font-serif);font-size:.95rem;font-style:italic;margin-bottom:6px;color:rgba(245,232,200,.6)}
+.footer-copy{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,232,200,.3)}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{background:var(--ivory);border:1px solid rgba(44,36,22,.1);border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
+.faq-q{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.88rem;font-weight:500;color:var(--ink);transition:background .15s;gap:12px}
+.faq-q:hover{background:var(--gold-bg)}
+.faq-arrow{color:var(--gold-d);font-size:.75rem;transition:transform .2s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 18px 14px;font-size:.85rem;color:var(--ink-soft);line-height:1.7;border-top:1px solid rgba(44,36,22,.08)}
+.faq-item.open .faq-a{display:block}
+
+/* Empty states */
+.empty-state{text-align:center;padding:48px 20px;color:var(--ink-soft)}
+.empty-icon{font-size:2.5rem;margin-bottom:10px;opacity:.5}
+.empty-state p{font-style:italic;font-size:.9rem}
+
+@media(max-width:640px){
+  .form-grid.cols-2,.form-grid.cols-3{grid-template-columns:1fr}
+  .form-field.span-2{grid-column:span 1}
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+  .chapter-grid{grid-template-columns:repeat(6,1fr)}
+  .section-title{font-size:1.5rem}
+  .verse-list{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-brand">
+    <div class="brand-icon">✦</div>
+    <div>
+      <div class="brand-text">The Scripture Journal</div>
+      <div class="brand-sub">Erana Banana</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <input type="text" id="reader-name" class="header-name-input" placeholder="Your name…" oninput="saveData();updateGreeting()">
+    <button class="theme-btn" onclick="cycleTheme()">
+      <span id="theme-icon">☀️</span> <span id="theme-label">Light</span>
+    </button>
+  </div>
+</header>
+
+<!-- COUNTDOWN RIBBON -->
+<div class="countdown-ribbon" id="countdown-ribbon"></div>
+
+<!-- NAV -->
+<nav class="nav-wrapper">
+  <div class="nav-tabs" role="tablist">
+    <button class="nav-tab active" id="nav-dashboard" onclick="showPanel('dashboard',this)" role="tab"><span class="tab-icon">✦</span> Dashboard</button>
+    <button class="nav-tab" onclick="showPanel('tracker',this)" role="tab"><span class="tab-icon">📖</span> Reading Tracker</button>
+    <button class="nav-tab" onclick="showPanel('study',this)" role="tab"><span class="tab-icon">✏️</span> Study Sessions</button>
+    <button class="nav-tab" onclick="showPanel('sermons',this)" role="tab"><span class="tab-icon">🎙️</span> Sermon Notes</button>
+    <button class="nav-tab" onclick="showPanel('prayer',this)" role="tab"><span class="tab-icon">🙏</span> Prayer Log</button>
+    <button class="nav-tab" onclick="showPanel('verses',this)" role="tab"><span class="tab-icon">💛</span> Favourite Verses</button>
+    <button class="nav-tab" onclick="showPanel('howto',this)" role="tab"><span class="tab-icon">📖</span> How To</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════════════ -->
+<section id="panel-dashboard" class="panel active">
+  <div class="section-eyebrow">Your Journey</div>
+  <h2 class="section-title" id="dash-greeting">Welcome to <em>your Scripture Journal</em></h2>
+  <p class="section-desc">Track your progress through the Bible, your study sessions, prayers, and favourite verses — all in one beautiful, private place.</p>
+
+  <div class="summary-cards">
+    <div class="stat-card gold">
+      <div class="stat-label">Chapters Read</div>
+      <div class="stat-value" id="dash-chapters">0</div>
+      <div class="stat-sub">of 1,189 total</div>
+      <div class="progress-bar"><div class="progress-fill" id="dash-chapters-bar" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card sage">
+      <div class="stat-label">Books Complete</div>
+      <div class="stat-value" id="dash-books">0</div>
+      <div class="stat-sub">of 66 books</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">Study Sessions</div>
+      <div class="stat-value" id="dash-sessions">0</div>
+      <div class="stat-sub">logged</div>
+    </div>
+    <div class="stat-card wine">
+      <div class="stat-label">Prayers Answered</div>
+      <div class="stat-value" id="dash-answered">0</div>
+      <div class="stat-sub">of <span id="dash-prayers-total">0</span> logged</div>
+    </div>
+    <div class="stat-card gold">
+      <div class="stat-label">Sermon Notes</div>
+      <div class="stat-value" id="dash-sermons">0</div>
+      <div class="stat-sub">saved</div>
+    </div>
+    <div class="stat-card sage">
+      <div class="stat-label">Saved Verses</div>
+      <div class="stat-value" id="dash-verses">0</div>
+      <div class="stat-sub">in your collection</div>
+    </div>
+  </div>
+
+  <div class="heatmap-container">
+    <div class="heatmap-title">Bible Reading Progress — All 66 Books</div>
+    <div class="heatmap-grid" id="heatmap"></div>
+    <div class="heatmap-legend">
+      <span>Not started</span>
+      <div class="heatmap-legend-cell" style="background:rgba(44,36,22,.08)"></div>
+      <div class="heatmap-legend-cell" style="background:var(--gold-l)"></div>
+      <div class="heatmap-legend-cell" style="background:var(--gold)"></div>
+      <div class="heatmap-legend-cell" style="background:var(--sage)"></div>
+      <span>Complete</span>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Alerts &amp; Nudges</span></div>
+  <div class="alert-grid" id="alerts-grid"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     READING TRACKER
+══════════════════════════════════════════════ -->
+<section id="panel-tracker" class="panel">
+  <div class="section-eyebrow">Scripture</div>
+  <h2 class="section-title">Reading <em>Tracker</em></h2>
+  <p class="section-desc">Click any book to mark chapters as read. The tracker updates in real time across your journal. Click a book name to open its chapter grid.</p>
+
+  <div class="summary-cards" style="margin-bottom:20px">
+    <div class="stat-card gold">
+      <div class="stat-label">OT Progress</div>
+      <div class="stat-value" id="ot-chapters">0</div>
+      <div class="stat-sub">of 929 chapters</div>
+      <div class="progress-bar"><div class="progress-fill" id="ot-bar" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card sage">
+      <div class="stat-label">NT Progress</div>
+      <div class="stat-value" id="nt-chapters">0</div>
+      <div class="stat-sub">of 260 chapters</div>
+      <div class="progress-bar"><div class="progress-fill" id="nt-bar" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">Overall</div>
+      <div class="stat-value" id="total-pct">0%</div>
+      <div class="stat-sub">of the whole Bible</div>
+    </div>
+  </div>
+
+  <div class="testament-label">Old Testament</div>
+  <div id="ot-books"></div>
+
+  <div class="testament-label">New Testament</div>
+  <div id="nt-books"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     STUDY SESSIONS
+══════════════════════════════════════════════ -->
+<section id="panel-study" class="panel">
+  <div class="section-eyebrow">Bible Study</div>
+  <h2 class="section-title">Study <em>Sessions</em></h2>
+  <p class="section-desc">Log your Bible study using guided methods. Choose a method and the relevant fields appear automatically. All sessions are saved and searchable.</p>
+
+  <div class="form-card">
+    <div class="section-eyebrow" style="margin-bottom:12px">Study Method</div>
+    <div class="method-tabs" id="method-tabs">
+      <button class="method-tab active" onclick="setMethod('soap',this)">SOAP</button>
+      <button class="method-tab" onclick="setMethod('verse',this)">Verse Mapping</button>
+      <button class="method-tab" onclick="setMethod('topical',this)">Topical</button>
+      <button class="method-tab" onclick="setMethod('book',this)">Book Overview</button>
+      <button class="method-tab" onclick="setMethod('chapter',this)">Chapter Summary</button>
+      <button class="method-tab" onclick="setMethod('word',this)">Word Study</button>
+      <button class="method-tab" onclick="setMethod('biographical',this)">Biographical</button>
+      <button class="method-tab" onclick="setMethod('devotional',this)">Devotional</button>
+    </div>
+
+    <div id="method-desc" class="method-desc"></div>
+
+    <div class="form-grid" id="study-common-fields">
+      <div class="form-field">
+        <label>Date</label>
+        <input type="date" id="study-date">
+      </div>
+      <div class="form-field">
+        <label>Passage / Reference</label>
+        <input type="text" id="study-passage" placeholder="e.g. John 3:16-17, Romans 8">
+      </div>
+      <div class="form-field">
+        <label>Translation</label>
+        <select id="study-translation">
+          <option>NIV</option><option>ESV</option><option>NLT</option>
+          <option>KJV</option><option>NKJV</option><option>CSB</option>
+          <option>NASB</option><option>MSG</option><option>AMP</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Dynamic method fields injected here -->
+    <div id="method-fields-container"></div>
+
+    <button class="btn-primary" onclick="addStudySession()"><span>+</span> Save Session</button>
+  </div>
+
+  <div class="section-divider"><span>Saved Sessions (<span id="session-count">0</span>)</span></div>
+  <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <input type="text" id="session-search" placeholder="Search sessions…" style="max-width:260px" oninput="renderSessions()">
+    <select id="session-filter-method" style="max-width:180px" onchange="renderSessions()">
+      <option value="">All methods</option>
+      <option>soap</option><option>verse</option><option>topical</option>
+      <option>book</option><option>chapter</option><option>word</option>
+      <option>biographical</option><option>devotional</option>
+    </select>
+  </div>
+  <div class="session-list" id="session-list"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SERMON NOTES
+══════════════════════════════════════════════ -->
+<section id="panel-sermons" class="panel">
+  <div class="section-eyebrow">Church</div>
+  <h2 class="section-title">Sermon <em>Notes</em></h2>
+  <p class="section-desc">Capture key points, scripture references, and personal application from every sermon. Click any saved note to expand the full details.</p>
+
+  <div class="form-card">
+    <div class="form-grid cols-3">
+      <div class="form-field">
+        <label>Date</label>
+        <input type="date" id="serm-date">
+      </div>
+      <div class="form-field">
+        <label>Speaker</label>
+        <input type="text" id="serm-speaker" placeholder="e.g. Pastor James">
+      </div>
+      <div class="form-field">
+        <label>Series / Topic</label>
+        <input type="text" id="serm-series" placeholder="e.g. Fruit of the Spirit">
+      </div>
+      <div class="form-field span-full">
+        <label>Sermon Title</label>
+        <input type="text" id="serm-title" placeholder="e.g. Walking in the Spirit">
+      </div>
+      <div class="form-field span-full">
+        <label>Key Scripture(s)</label>
+        <input type="text" id="serm-scripture" placeholder="e.g. Galatians 5:22-23, Romans 8:4">
+      </div>
+      <div class="form-field span-full">
+        <label>Key Points / Main Message</label>
+        <textarea id="serm-points" rows="4" placeholder="Write the main points, key takeaways, things that stood out…"></textarea>
+      </div>
+      <div class="form-field span-full">
+        <label>Personal Application — How will you live this out?</label>
+        <textarea id="serm-application" rows="3" placeholder="What specific action, thought, or change does God want from you this week?"></textarea>
+      </div>
+      <div class="form-field span-full">
+        <label>Prayer Response</label>
+        <textarea id="serm-prayer" rows="2" placeholder="A short prayer in response to today's message…"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Quotes to Remember</label>
+        <textarea id="serm-quotes" rows="2" placeholder="Memorable quotes from the sermon…"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Further Study / Questions</label>
+        <textarea id="serm-questions" rows="2" placeholder="Questions raised, passages to explore further…"></textarea>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="addSermon()"><span>+</span> Save Sermon Notes</button>
+  </div>
+
+  <div class="section-divider"><span>Saved Notes (<span id="sermon-count">0</span>)</span></div>
+  <div style="margin-bottom:14px">
+    <input type="text" id="sermon-search" placeholder="Search sermons, speakers, scripture…" style="max-width:340px" oninput="renderSermons()">
+  </div>
+  <div class="sermon-list" id="sermon-list"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PRAYER LOG
+══════════════════════════════════════════════ -->
+<section id="panel-prayer" class="panel">
+  <div class="section-eyebrow">Prayer</div>
+  <h2 class="section-title">Prayer <em>Log</em></h2>
+  <p class="section-desc">Record your prayers, track intercessions, and celebrate answered prayers. Organised across Active, Answered, and Ongoing intercessions.</p>
+
+  <div class="summary-cards">
+    <div class="stat-card gold">
+      <div class="stat-label">Active Prayers</div>
+      <div class="stat-value" id="prayer-active-count">0</div>
+      <div class="stat-sub">awaiting answer</div>
+    </div>
+    <div class="stat-card sage">
+      <div class="stat-label">Answered ✓</div>
+      <div class="stat-value" id="prayer-answered-count">0</div>
+      <div class="stat-sub">praise reports</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">Ongoing</div>
+      <div class="stat-value" id="prayer-ongoing-count">0</div>
+      <div class="stat-sub">intercessions</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Praying for</label>
+        <input type="text" id="prayer-person" placeholder="Person, situation, or topic">
+      </div>
+      <div class="form-field">
+        <label>Category</label>
+        <select id="prayer-category">
+          <option>Personal / Self</option><option>Family</option><option>Friend</option>
+          <option>Health</option><option>Career / Provision</option><option>Relationships</option>
+          <option>Church / Ministry</option><option>Nation / World</option>
+          <option>Praise &amp; Thanksgiving</option><option>Guidance</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Date Started</label>
+        <input type="date" id="prayer-date">
+      </div>
+      <div class="form-field">
+        <label>Status</label>
+        <select id="prayer-status">
+          <option value="active">Active — awaiting answer</option>
+          <option value="answered">Answered ✓</option>
+          <option value="ongoing">Ongoing intercession</option>
+        </select>
+      </div>
+      <div class="form-field span-full">
+        <label>Prayer Request</label>
+        <textarea id="prayer-request" rows="3" placeholder="Write your prayer request in detail…"></textarea>
+      </div>
+      <div class="form-field span-full" id="answered-note-field" style="display:none">
+        <label>How was it answered? (Date &amp; Details)</label>
+        <textarea id="prayer-answered-note" rows="2" placeholder="Describe how God answered this prayer…"></textarea>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="addPrayer()"><span>+</span> Add Prayer</button>
+  </div>
+
+  <div class="prayer-tabs">
+    <button class="prayer-tab-btn active" id="ptab-all" onclick="setPrayerTab('all',this)">All</button>
+    <button class="prayer-tab-btn" id="ptab-active" onclick="setPrayerTab('active',this)">Active</button>
+    <button class="prayer-tab-btn" id="ptab-answered" onclick="setPrayerTab('answered',this)">Answered</button>
+    <button class="prayer-tab-btn" id="ptab-ongoing" onclick="setPrayerTab('ongoing',this)">Ongoing</button>
+  </div>
+  <div class="prayer-list" id="prayer-list"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FAVOURITE VERSES
+══════════════════════════════════════════════ -->
+<section id="panel-verses" class="panel">
+  <div class="section-eyebrow">Scripture Collection</div>
+  <h2 class="section-title">Favourite <em>Verses</em></h2>
+  <p class="section-desc">Save the scriptures that speak to you. Add a personal reflection and tags to build a collection you can return to again and again.</p>
+
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Reference</label>
+        <input type="text" id="verse-ref" placeholder="e.g. John 3:16, Psalm 23:1">
+      </div>
+      <div class="form-field">
+        <label>Translation</label>
+        <select id="verse-translation">
+          <option>NIV</option><option>ESV</option><option>NLT</option>
+          <option>KJV</option><option>NKJV</option><option>CSB</option>
+          <option>NASB</option><option>MSG</option><option>AMP</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Tag</label>
+        <select id="verse-tag">
+          <option value="">— Select a tag —</option>
+          <option>Faith</option><option>Hope</option><option>Love</option>
+          <option>Comfort</option><option>Strength</option><option>Wisdom</option>
+          <option>Guidance</option><option>Gratitude</option><option>Forgiveness</option>
+          <option>Prayer</option><option>Grace</option><option>Identity in Christ</option>
+          <option>Promises</option><option>Courage</option><option>Peace</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-field span-full">
+        <label>Verse Text</label>
+        <textarea id="verse-text" rows="3" placeholder="Type or paste the verse here…"></textarea>
+      </div>
+      <div class="form-field span-full">
+        <label>Personal Reflection — What does this mean to you?</label>
+        <textarea id="verse-reflection" rows="3" placeholder="Why did this verse stand out? How does it apply to your life?"></textarea>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="addVerse()"><span>+</span> Save Verse</button>
+  </div>
+
+  <div class="section-divider"><span>Your Collection (<span id="verse-count">0</span>)</span></div>
+  <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap">
+    <input type="text" id="verse-search" placeholder="Search verses or reflections…" style="max-width:260px" oninput="renderVerses()">
+    <select id="verse-filter-tag" style="max-width:180px" onchange="renderVerses()">
+      <option value="">All tags</option>
+      <option>Faith</option><option>Hope</option><option>Love</option>
+      <option>Comfort</option><option>Strength</option><option>Wisdom</option>
+      <option>Guidance</option><option>Gratitude</option><option>Forgiveness</option>
+      <option>Prayer</option><option>Grace</option><option>Identity in Christ</option>
+      <option>Promises</option><option>Courage</option><option>Peace</option>
+    </select>
+  </div>
+  <div class="verse-list" id="verse-list"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     HOW TO
+══════════════════════════════════════════════ -->
+<section id="panel-howto" class="panel">
+  <div class="section-eyebrow">Getting Started</div>
+  <h2 class="section-title">How To <em>Use This Journal</em></h2>
+  <p class="section-desc">A guide to every section. Start here, then work through the journal at your own pace.</p>
+
+  <div class="section-divider"><span>Quick Start</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:32px">
+    <div class="stat-card" style="text-align:left;padding:20px 22px">
+      <div style="font-size:1.5rem;margin-bottom:8px">01</div>
+      <div style="font-family:var(--font-serif);font-size:1rem;font-weight:500;margin-bottom:6px">Enter Your Name</div>
+      <div style="font-size:.83rem;color:var(--ink-soft);line-height:1.6">Type your name in the header input at the top right. Your journal greets you by name and the data is saved privately in your browser.</div>
+    </div>
+    <div class="stat-card" style="text-align:left;padding:20px 22px">
+      <div style="font-size:1.5rem;margin-bottom:8px">02</div>
+      <div style="font-family:var(--font-serif);font-size:1rem;font-weight:500;margin-bottom:6px">Start Your Reading Tracker</div>
+      <div style="font-size:.83rem;color:var(--ink-soft);line-height:1.6">Go to Reading Tracker and click any book to open its chapter grid. Tap each chapter you have read. Progress saves automatically.</div>
+    </div>
+    <div class="stat-card" style="text-align:left;padding:20px 22px">
+      <div style="font-size:1.5rem;margin-bottom:8px">03</div>
+      <div style="font-family:var(--font-serif);font-size:1rem;font-weight:500;margin-bottom:6px">Log a Study Session</div>
+      <div style="font-size:.83rem;color:var(--ink-soft);line-height:1.6">Choose a study method (SOAP is great for beginners), fill in the passage and notes, and save. Each method has a guide at the top explaining how it works.</div>
+    </div>
+    <div class="stat-card" style="text-align:left;padding:20px 22px">
+      <div style="font-size:1.5rem;margin-bottom:8px">04</div>
+      <div style="font-family:var(--font-serif);font-size:1rem;font-weight:500;margin-bottom:6px">Export Your Data</div>
+      <div style="font-size:.83rem;color:var(--ink-soft);line-height:1.6">Use the Export button in the footer to download a backup file. Import it on any device to restore your journal. Do this regularly.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Study Methods Explained</span></div>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ SOAP Method — Scripture, Observation, Application, Prayer</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">The most popular structured Bible study method. <strong>Scripture:</strong> write out the key verse(s). <strong>Observation:</strong> what does the passage say? Note facts, context, what stands out. <strong>Application:</strong> what does this mean for your life right now? <strong>Prayer:</strong> respond to God in prayer based on what you read. SOAP works for any passage and any level of experience.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Verse Mapping — Deep dive into a single verse</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Choose one verse and break it apart. Look up the original Hebrew or Greek meaning of key words. Find cross-references (other verses that use the same word or theme). Note the historical and cultural context. Rewrite the verse in your own words. Verse mapping transforms a familiar verse into fresh revelation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Topical Study — Follow a theme across the Bible</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Choose a topic (e.g. Faith, Forgiveness, the Holy Spirit) and collect all the relevant passages across both testaments. A concordance or Bible app makes this easy. Record what each passage says about the topic and draw conclusions at the end. Great for building theological depth on specific subjects.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Book Overview — Understand a whole book of the Bible</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Read through an entire book (or use a summary) and answer key questions: Who wrote it, when, and to whom? What are the major themes? How does it fit into the larger Bible story? What is the main message? Book overviews help you see the big picture before diving into chapter-by-chapter study.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Word Study — Explore the original meaning of a word</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Pick a significant word from the text and look it up in a Hebrew or Greek lexicon (Blue Letter Bible is free online). Record the original word, its definition, how many times it appears, and other verses that use it. Understanding original language meanings often unlocks entirely new dimensions of a familiar passage.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Biographical Study — Study a person in the Bible</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Choose a biblical figure and trace their story. Who were they? What were their strengths and weaknesses? What was their relationship with God? What can you learn from their life? What promises or challenges apply to your own walk? Great examples: David, Esther, Paul, Mary Magdalene, Daniel.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>✦ Devotional — A shorter, reflective approach</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Read a short passage, sit quietly with it, and ask: What is God saying to me today through this? Write your reflection — not an analysis, but a personal, honest response. What are you feeling? What are you grateful for? What does God want you to trust him with? Devotional reading is less about study and more about encounter.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Will my data be saved if I close the browser?</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes — everything saves automatically to your browser's local storage. As long as you do not clear your browser data, your journal will be exactly as you left it when you return. Use the Export button regularly to back up your data to a file you can keep safely.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Can I use this on multiple devices?</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes. Export your data on one device, then open the journal on another device and use Import Data to restore it. Repeat whenever you want to sync. Your data is never sent to any server — it lives entirely on your own devices.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Is my journal private?</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Completely. All data is stored locally in your browser. Nothing is sent to Erana Banana or any third party. Your prayers, reflections, and notes are visible only to you on your own device.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-actions">
+    <button class="btn-footer" onclick="exportData()">⬇ Export Data</button>
+    <button class="btn-footer" onclick="document.getElementById('import-file').click()">⬆ Import Data</button>
+    <button class="btn-footer btn-footer-danger" onclick="openClearModal()">🗑 Clear All Data</button>
+  </div>
+  <p class="footer-tagline">✦ &nbsp; Let the word of Christ dwell in you richly &nbsp; ✦</p>
+  <p class="footer-copy">© Erana Banana. All rights reserved.</p>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="clear-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-icon">🗑️</div>
+    <h3 class="modal-title">Clear All Data</h3>
+    <p class="modal-desc">This will permanently delete all your journal data. Export a backup first.</p>
+    <input type="text" id="clear-confirm" class="modal-input" placeholder="Type DELETE to confirm…" oninput="document.getElementById('btn-clear-confirm').disabled=this.value!=='DELETE'">
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="document.getElementById('clear-modal').classList.remove('open')">Cancel</button>
+      <button class="btn-modal-danger" id="btn-clear-confirm" disabled onclick="clearAllData()">Clear Everything</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chapter modal -->
+<div class="chapter-modal-overlay" id="chapter-modal" onclick="if(event.target===this)closeChapterModal()">
+  <div class="chapter-modal" onclick="event.stopPropagation()">
+    <div class="chapter-modal-title" id="cmodal-title">Genesis</div>
+    <div class="chapter-modal-sub" id="cmodal-sub">Click chapters to mark as read</div>
+    <div class="chapter-grid" id="cmodal-grid"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="markAllChapters(false)">Clear All</button>
+      <button class="btn-primary" onclick="markAllChapters(true)">Mark All Read</button>
+      <button class="btn-modal-cancel" onclick="closeChapterModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="import-file" accept=".json" onchange="importData(event)" style="display:none">
+<div class="save-toast" id="save-toast">All changes saved ✓</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// BIBLE DATA
+// ════════════════════════════════════════════════════════════
+const OT_BOOKS = [
+  {n:"Genesis",c:50,s:"Torah"},{n:"Exodus",c:40,s:"Torah"},{n:"Leviticus",c:27,s:"Torah"},
+  {n:"Numbers",c:36,s:"Torah"},{n:"Deuteronomy",c:34,s:"Torah"},
+  {n:"Joshua",c:24,s:"History"},{n:"Judges",c:21,s:"History"},{n:"Ruth",c:4,s:"History"},
+  {n:"1 Samuel",c:31,s:"History"},{n:"2 Samuel",c:24,s:"History"},{n:"1 Kings",c:22,s:"History"},
+  {n:"2 Kings",c:25,s:"History"},{n:"1 Chronicles",c:29,s:"History"},{n:"2 Chronicles",c:36,s:"History"},
+  {n:"Ezra",c:10,s:"History"},{n:"Nehemiah",c:13,s:"History"},{n:"Esther",c:10,s:"History"},
+  {n:"Job",c:42,s:"Wisdom"},{n:"Psalms",c:150,s:"Wisdom"},{n:"Proverbs",c:31,s:"Wisdom"},
+  {n:"Ecclesiastes",c:12,s:"Wisdom"},{n:"Song of Solomon",c:8,s:"Wisdom"},
+  {n:"Isaiah",c:66,s:"Major Prophets"},{n:"Jeremiah",c:52,s:"Major Prophets"},
+  {n:"Lamentations",c:5,s:"Major Prophets"},{n:"Ezekiel",c:48,s:"Major Prophets"},{n:"Daniel",c:12,s:"Major Prophets"},
+  {n:"Hosea",c:14,s:"Minor Prophets"},{n:"Joel",c:3,s:"Minor Prophets"},{n:"Amos",c:9,s:"Minor Prophets"},
+  {n:"Obadiah",c:1,s:"Minor Prophets"},{n:"Jonah",c:4,s:"Minor Prophets"},{n:"Micah",c:7,s:"Minor Prophets"},
+  {n:"Nahum",c:3,s:"Minor Prophets"},{n:"Habakkuk",c:3,s:"Minor Prophets"},{n:"Zephaniah",c:3,s:"Minor Prophets"},
+  {n:"Haggai",c:2,s:"Minor Prophets"},{n:"Zechariah",c:14,s:"Minor Prophets"},{n:"Malachi",c:4,s:"Minor Prophets"},
+];
+const NT_BOOKS = [
+  {n:"Matthew",c:28,s:"Gospels"},{n:"Mark",c:16,s:"Gospels"},{n:"Luke",c:24,s:"Gospels"},{n:"John",c:21,s:"Gospels"},
+  {n:"Acts",c:28,s:"History"},
+  {n:"Romans",c:16,s:"Paul's Letters"},{n:"1 Corinthians",c:16,s:"Paul's Letters"},{n:"2 Corinthians",c:13,s:"Paul's Letters"},
+  {n:"Galatians",c:6,s:"Paul's Letters"},{n:"Ephesians",c:6,s:"Paul's Letters"},{n:"Philippians",c:4,s:"Paul's Letters"},
+  {n:"Colossians",c:4,s:"Paul's Letters"},{n:"1 Thessalonians",c:5,s:"Paul's Letters"},{n:"2 Thessalonians",c:3,s:"Paul's Letters"},
+  {n:"1 Timothy",c:6,s:"Paul's Letters"},{n:"2 Timothy",c:4,s:"Paul's Letters"},{n:"Titus",c:3,s:"Paul's Letters"},{n:"Philemon",c:1,s:"Paul's Letters"},
+  {n:"Hebrews",c:13,s:"General Letters"},{n:"James",c:5,s:"General Letters"},{n:"1 Peter",c:5,s:"General Letters"},
+  {n:"2 Peter",c:3,s:"General Letters"},{n:"1 John",c:5,s:"General Letters"},{n:"2 John",c:1,s:"General Letters"},
+  {n:"3 John",c:1,s:"General Letters"},{n:"Jude",c:1,s:"General Letters"},
+  {n:"Revelation",c:22,s:"Prophecy"},
+];
+const ALL_BOOKS = [...OT_BOOKS.map(b=>({...b,t:'OT'})), ...NT_BOOKS.map(b=>({...b,t:'NT'}))];
+const TOTAL_CHAPTERS = 1189;
+
+// ════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════
+function makeDefaultState(){
+  return {
+    name:'', theme:'light',
+    chaptersRead:{}, // key: "BookName-ch" → true
+    sessions:[], sermons:[], prayers:[], verses:[],
+  };
+}
+let state = makeDefaultState();
+let currentBookModal = null; // book being edited in chapter modal
+let currentPrayerTab = 'all';
+let currentMethod = 'soap';
+
+// ════════════════════════════════════════════════════════════
+// THEME
+// ════════════════════════════════════════════════════════════
+const THEMES = ['light','dark','sepia'];
+let themeIdx = 0;
+function cycleTheme(){
+  themeIdx = (themeIdx + 1) % THEMES.length;
+  applyTheme(THEMES[themeIdx]);
+  state.theme = THEMES[themeIdx]; saveData();
+}
+function applyTheme(t){
+  document.body.removeAttribute('data-theme');
+  if(t !== 'light') document.body.setAttribute('data-theme', t);
+  const icons = {light:'☀️',dark:'🌙',sepia:'📜'};
+  const labels = {light:'Light',dark:'Dark',sepia:'Sepia'};
+  const el = document.getElementById('theme-icon');
+  const lb = document.getElementById('theme-label');
+  if(el) el.textContent = icons[t] || '☀️';
+  if(lb) lb.textContent = labels[t] || 'Light';
+  themeIdx = THEMES.indexOf(t);
+  if(themeIdx < 0) themeIdx = 0;
+}
+
+// ════════════════════════════════════════════════════════════
+// NAV
+// ════════════════════════════════════════════════════════════
+function showPanel(id, btn){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('panel-' + id);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+  else {
+    const found = document.querySelector(`.nav-tab[onclick*="'${id}'"]`);
+    if(found) found.classList.add('active');
+  }
+  updateAll();
+}
+
+// ════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════
+function esc(s){if(s===null||s===undefined)return'';return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function setText(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+function toggleFaq(el){el.parentElement.classList.toggle('open');}
+let toastTimer;
+function showToast(msg='Saved ✓'){
+  const t=document.getElementById('save-toast');
+  if(!t)return; t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+function updateGreeting(){
+  const name = document.getElementById('reader-name')?.value?.trim();
+  const el = document.getElementById('dash-greeting');
+  if(!el) return;
+  el.innerHTML = name
+    ? `Welcome back, <em>${esc(name)}</em>`
+    : 'Welcome to <em>your Scripture Journal</em>';
+}
+
+// ════════════════════════════════════════════════════════════
+// PERSISTENCE
+// ════════════════════════════════════════════════════════════
+let saveTimer;
+function saveData(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      state.name = document.getElementById('reader-name')?.value || '';
+      localStorage.setItem('sj_state_v1', JSON.stringify(state));
+      showToast('All changes saved ✓');
+    } catch(e){ console.warn('Save failed', e); }
+  }, 600);
+}
+function loadData(){
+  try {
+    const raw = localStorage.getItem('sj_state_v1');
+    if(!raw) return;
+    const parsed = JSON.parse(raw);
+    state = {...makeDefaultState(), ...parsed};
+    if(!state.chaptersRead) state.chaptersRead = {};
+    if(!state.sessions) state.sessions = [];
+    if(!state.sermons) state.sermons = [];
+    if(!state.prayers) state.prayers = [];
+    if(!state.verses) state.verses = [];
+  } catch(e){ console.warn('Load failed', e); }
+}
+function exportData(){
+  state.name = document.getElementById('reader-name')?.value || '';
+  const blob = new Blob([JSON.stringify({exported:new Date().toISOString(),...state},null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  const safeName = (state.name||'journal').replace(/\s+/g,'_');
+  a.href = URL.createObjectURL(blob);
+  a.download = `scripture_journal_${safeName}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+  showToast('Exported ✓');
+}
+function importData(event){
+  const file = event.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      const parsed = JSON.parse(e.target.result);
+      state = {...makeDefaultState(), ...parsed};
+      if(!state.chaptersRead) state.chaptersRead = {};
+      localStorage.setItem('sj_state_v1', JSON.stringify(state));
+      reinit(); showToast('Data imported ✓');
+    } catch(err){ alert('Import failed: ' + err.message); }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+function openClearModal(){ document.getElementById('clear-confirm').value=''; document.getElementById('btn-clear-confirm').disabled=true; document.getElementById('clear-modal').classList.add('open'); setTimeout(()=>document.getElementById('clear-confirm').focus(),120); }
+function clearAllData(){ if(document.getElementById('clear-confirm').value!=='DELETE')return; localStorage.removeItem('sj_state_v1'); state=makeDefaultState(); document.getElementById('clear-modal').classList.remove('open'); reinit(); showToast('All data cleared'); }
+
+// ════════════════════════════════════════════════════════════
+// READING TRACKER
+// ════════════════════════════════════════════════════════════
+function chKey(bookName, ch){ return bookName + '|' + ch; }
+function bookReadCount(book){ let n=0; for(let ch=1;ch<=book.c;ch++) if(state.chaptersRead[chKey(book.n,ch)]) n++; return n; }
+function totalChaptersRead(){ return Object.values(state.chaptersRead).filter(Boolean).length; }
+function booksComplete(){ return ALL_BOOKS.filter(b => bookReadCount(b) === b.c).length; }
+
+function buildBookCards(books, containerId){
+  const cont = document.getElementById(containerId);
+  if(!cont) return;
+  cont.innerHTML = '';
+  // Group by section
+  const sections = [...new Set(books.map(b=>b.s))];
+  sections.forEach(section => {
+    const label = document.createElement('div');
+    label.className = 'section-group-label';
+    label.textContent = section;
+    cont.appendChild(label);
+    const grid = document.createElement('div');
+    grid.className = 'books-grid';
+    books.filter(b=>b.s===section).forEach(book => {
+      const read = bookReadCount(book);
+      const pct = book.c > 0 ? Math.round(read/book.c*100) : 0;
+      const state2 = read === 0 ? 'unread' : read === book.c ? 'complete' : 'started';
+      const card = document.createElement('div');
+      card.className = `book-card ${state2}`;
+      card.onclick = () => openChapterModal(book);
+      card.innerHTML = `
+        ${state2==='complete' ? '<div class="book-check">✓</div>' : ''}
+        <div class="book-name">${esc(book.n)}</div>
+        <div class="book-chapters">${read}/${book.c} chapters</div>
+        <div class="book-progress-bar"><div class="book-progress-fill ${state2}" style="width:${pct}%"></div></div>`;
+      grid.appendChild(card);
+    });
+    cont.appendChild(grid);
+  });
+}
+
+function buildTracker(){
+  buildBookCards(OT_BOOKS, 'ot-books');
+  buildBookCards(NT_BOOKS, 'nt-books');
+  updateTrackerStats();
+}
+
+function updateTrackerStats(){
+  const total = totalChaptersRead();
+  const otRead = OT_BOOKS.reduce((s,b) => s+bookReadCount(b), 0);
+  const ntRead = NT_BOOKS.reduce((s,b) => s+bookReadCount(b), 0);
+  setText('ot-chapters', otRead);
+  setText('nt-chapters', ntRead);
+  setText('total-pct', Math.round(total/TOTAL_CHAPTERS*100) + '%');
+  const otBar = document.getElementById('ot-bar');
+  const ntBar = document.getElementById('nt-bar');
+  if(otBar) otBar.style.width = Math.round(otRead/929*100) + '%';
+  if(ntBar) ntBar.style.width = Math.round(ntRead/260*100) + '%';
+}
+
+// Chapter modal
+function openChapterModal(book){
+  currentBookModal = book;
+  document.getElementById('cmodal-title').textContent = book.n;
+  document.getElementById('cmodal-sub').textContent = `${book.s} · ${book.c} chapter${book.c!==1?'s':''}`;
+  const grid = document.getElementById('cmodal-grid');
+  grid.innerHTML = '';
+  for(let ch=1; ch<=book.c; ch++){
+    const btn = document.createElement('button');
+    btn.className = 'ch-btn' + (state.chaptersRead[chKey(book.n,ch)] ? ' read' : '');
+    btn.textContent = ch;
+    btn.onclick = () => toggleChapter(book, ch, btn);
+    grid.appendChild(btn);
+  }
+  document.getElementById('chapter-modal').classList.add('open');
+}
+function closeChapterModal(){
+  document.getElementById('chapter-modal').classList.remove('open');
+  buildTracker(); updateDashboard(); saveData();
+}
+function toggleChapter(book, ch, btn){
+  const k = chKey(book.n, ch);
+  state.chaptersRead[k] = !state.chaptersRead[k];
+  btn.classList.toggle('read', !!state.chaptersRead[k]);
+  updateTrackerStats(); updateDashboard();
+}
+function markAllChapters(val){
+  if(!currentBookModal) return;
+  for(let ch=1; ch<=currentBookModal.c; ch++) state.chaptersRead[chKey(currentBookModal.n,ch)] = val;
+  openChapterModal(currentBookModal); // refresh grid
+  updateTrackerStats(); updateDashboard();
+}
+
+// ════════════════════════════════════════════════════════════
+// STUDY SESSIONS
+// ════════════════════════════════════════════════════════════
+const METHOD_CONFIG = {
+  soap:{
+    label:'SOAP',
+    desc:'Scripture → Observation → Application → Prayer. Write out the verse, note what you see, apply it to your life, and respond in prayer.',
+    fields:[
+      {id:'soap-scripture',label:'Scripture — Write out the key verse(s)',type:'textarea',placeholder:'Copy the verse(s) here in full…'},
+      {id:'soap-observation',label:'Observation — What does the passage say?',type:'textarea',placeholder:'Facts, context, structure, what stands out…'},
+      {id:'soap-application',label:'Application — How does this apply to your life?',type:'textarea',placeholder:'What is God asking you to think, feel, or do differently?'},
+      {id:'soap-prayer',label:'Prayer — Your response to God',type:'textarea',placeholder:'Respond in prayer based on what you just read…'},
+    ]
+  },
+  verse:{
+    label:'Verse Mapping',
+    desc:'Break a single verse apart to find its deeper meaning. Look at the original language, cross-references, and context.',
+    fields:[
+      {id:'verse-context',label:'Context — What surrounds this verse?',type:'textarea',placeholder:'What comes before and after? Who is speaking? To whom?'},
+      {id:'verse-original',label:'Key Words in Original Language',type:'textarea',placeholder:'Look up significant words in Hebrew/Greek. What do they mean?'},
+      {id:'verse-crossrefs',label:'Cross-References',type:'textarea',placeholder:'Other verses that use the same theme or words…'},
+      {id:'verse-rewrite',label:'Rewrite in Your Own Words',type:'textarea',placeholder:'Paraphrase the verse as you understand it now…'},
+      {id:'verse-apply',label:'Personal Application',type:'textarea',placeholder:'What does this mean for your life today?'},
+    ]
+  },
+  topical:{
+    label:'Topical',
+    desc:'Study a theme or topic across the whole Bible. Collect all relevant passages and draw conclusions.',
+    fields:[
+      {id:'topic-name',label:'Topic / Theme',type:'text',placeholder:'e.g. Forgiveness, the Holy Spirit, Prayer…'},
+      {id:'topic-passages',label:'Key Passages Found',type:'textarea',placeholder:'List all the relevant verses and passages you found…'},
+      {id:'topic-ot',label:'What the Old Testament Says',type:'textarea',placeholder:'OT perspective, themes, examples…'},
+      {id:'topic-nt',label:'What the New Testament Says',type:'textarea',placeholder:'NT perspective, how Christ fulfils or expands this theme…'},
+      {id:'topic-conclusions',label:'Key Conclusions',type:'textarea',placeholder:'What did you learn? What is the full biblical picture?'},
+    ]
+  },
+  book:{
+    label:'Book Overview',
+    desc:'Study a whole book of the Bible — its author, audience, themes, and main message.',
+    fields:[
+      {id:'book-name',label:'Book of the Bible',type:'text',placeholder:'e.g. Philippians, Genesis, Revelation…'},
+      {id:'book-author',label:'Author, Date & Audience',type:'textarea',placeholder:'Who wrote it? When? To whom? In what circumstances?'},
+      {id:'book-themes',label:'Major Themes',type:'textarea',placeholder:'What are the big ideas running through this book?'},
+      {id:'book-structure',label:'Structure / Key Sections',type:'textarea',placeholder:'How is the book organised? What are the major sections?'},
+      {id:'book-message',label:'Main Message in One Sentence',type:'text',placeholder:'Summarise the book\'s central message…'},
+      {id:'book-apply',label:'Key Personal Application',type:'textarea',placeholder:'What is the most significant thing you want to take away?'},
+    ]
+  },
+  chapter:{
+    label:'Chapter Summary',
+    desc:'Work through a chapter section by section, capturing key ideas and your personal response.',
+    fields:[
+      {id:'chap-summary',label:'Chapter Summary — Main Points',type:'textarea',placeholder:'Briefly summarise each section or major idea…'},
+      {id:'chap-key-verse',label:'Key Verse from this Chapter',type:'text',placeholder:'Which verse stood out most?'},
+      {id:'chap-questions',label:'Questions Raised',type:'textarea',placeholder:'Anything you do not understand? Anything you want to study further?'},
+      {id:'chap-apply',label:'Personal Application',type:'textarea',placeholder:'What does God want you to do with this chapter?'},
+    ]
+  },
+  word:{
+    label:'Word Study',
+    desc:'Deep dive into the meaning of a single significant word in Scripture.',
+    fields:[
+      {id:'word-word',label:'Word Being Studied',type:'text',placeholder:'e.g. Grace, Agape, Shalom, Logos…'},
+      {id:'word-original',label:'Original Hebrew / Greek Word',type:'text',placeholder:'e.g. χάρις (charis), שָׁלוֹם (shalom)…'},
+      {id:'word-definition',label:'Definition from Lexicon / Dictionary',type:'textarea',placeholder:'What does this word mean in its original context?'},
+      {id:'word-occurrences',label:'Other Key Occurrences in Scripture',type:'textarea',placeholder:'Where else does this word appear? Any significant uses?'},
+      {id:'word-insight',label:'What You Learned',type:'textarea',placeholder:'How has understanding this word changed your reading of the passage?'},
+    ]
+  },
+  biographical:{
+    label:'Biographical',
+    desc:'Study a person in the Bible — their character, faith, failures, and what you can learn from their life.',
+    fields:[
+      {id:'bio-person',label:'Person Being Studied',type:'text',placeholder:'e.g. David, Esther, Paul, Mary Magdalene…'},
+      {id:'bio-background',label:'Background & Setting',type:'textarea',placeholder:'Who were they? When did they live? What was their context?'},
+      {id:'bio-character',label:'Character — Strengths & Weaknesses',type:'textarea',placeholder:'What kind of person were they? What stood out?'},
+      {id:'bio-relationship',label:'Their Relationship with God',type:'textarea',placeholder:'How did they walk with God? How did God use them?'},
+      {id:'bio-lessons',label:'Lessons for Your Life',type:'textarea',placeholder:'What do you want to emulate, avoid, or learn from their story?'},
+    ]
+  },
+  devotional:{
+    label:'Devotional',
+    desc:'A shorter, heart-focused approach. Read, sit quietly, and respond honestly to what God is saying.',
+    fields:[
+      {id:'dev-feeling',label:'What did you sense God saying?',type:'textarea',placeholder:'Not analysis — just what stirred in your heart as you read…'},
+      {id:'dev-gratitude',label:'What are you grateful for today?',type:'textarea',placeholder:'Take a moment to name specific blessings…'},
+      {id:'dev-trust',label:'What do you need to trust God with?',type:'textarea',placeholder:'Any worry, fear, or uncertainty you are bringing to God today?'},
+      {id:'dev-prayer',label:'Your Prayer',type:'textarea',placeholder:'Write a simple, honest prayer to close your time…'},
+    ]
+  },
+};
+
+function setMethod(method, btn){
+  currentMethod = method;
+  document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderMethodFields();
+}
+
+function renderMethodFields(){
+  const cfg = METHOD_CONFIG[currentMethod];
+  if(!cfg) return;
+  const descEl = document.getElementById('method-desc');
+  if(descEl) descEl.textContent = cfg.desc;
+  const cont = document.getElementById('method-fields-container');
+  if(!cont) return;
+  cont.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'form-grid';
+  cfg.fields.forEach(f => {
+    const field = document.createElement('div');
+    field.className = 'form-field span-full';
+    const label = document.createElement('label');
+    label.textContent = f.label;
+    field.appendChild(label);
+    let input;
+    if(f.type === 'textarea'){
+      input = document.createElement('textarea');
+      input.rows = 3;
+    } else {
+      input = document.createElement('input');
+      input.type = 'text';
+    }
+    input.id = 'mf-' + f.id;
+    input.placeholder = f.placeholder || '';
+    field.appendChild(input);
+    grid.appendChild(field);
+  });
+  cont.appendChild(grid);
+}
+
+function addStudySession(){
+  const passage = document.getElementById('study-passage')?.value.trim();
+  if(!passage){ alert('Please enter a passage or reference.'); return; }
+  const cfg = METHOD_CONFIG[currentMethod];
+  const fields = {};
+  cfg.fields.forEach(f => {
+    const el = document.getElementById('mf-' + f.id);
+    if(el) fields[f.id] = el.value.trim();
+  });
+  const session = {
+    id: Date.now(),
+    date: document.getElementById('study-date')?.value || new Date().toISOString().slice(0,10),
+    passage,
+    translation: document.getElementById('study-translation')?.value || 'NIV',
+    method: currentMethod,
+    fields,
+  };
+  state.sessions.unshift(session);
+  renderSessions(); updateDashboard(); saveData();
+  // Clear fields
+  document.getElementById('study-passage').value = '';
+  cfg.fields.forEach(f => { const el=document.getElementById('mf-'+f.id); if(el) el.value=''; });
+  showToast('Session saved ✓');
+}
+
+function renderSessions(){
+  const cont = document.getElementById('session-list');
+  if(!cont) return;
+  setText('session-count', state.sessions.length);
+  const search = document.getElementById('session-search')?.value.toLowerCase() || '';
+  const filterMethod = document.getElementById('session-filter-method')?.value || '';
+  let sessions = [...state.sessions];
+  if(filterMethod) sessions = sessions.filter(s => s.method === filterMethod);
+  if(search) sessions = sessions.filter(s =>
+    s.passage.toLowerCase().includes(search) ||
+    Object.values(s.fields||{}).some(v => v.toLowerCase().includes(search))
+  );
+  if(!sessions.length){
+    cont.innerHTML = '<div class="empty-state"><div class="empty-icon">✏️</div><p>No sessions yet — log your first Bible study above</p></div>';
+    return;
+  }
+  cont.innerHTML = '';
+  sessions.forEach(s => {
+    const cfg = METHOD_CONFIG[s.method] || {};
+    const badgeClass = 'badge-' + s.method;
+    // Get first non-empty field as preview
+    const preview = Object.values(s.fields||{}).find(v => v) || '';
+    const item = document.createElement('div');
+    item.className = 'session-item';
+    item.innerHTML = `
+      <div class="session-date">${s.date || '—'}</div>
+      <div class="session-body">
+        <span class="session-method-badge ${badgeClass}">${cfg.label || s.method}</span>
+        <div class="session-passage">${esc(s.passage)} <span style="font-weight:400;font-size:.8rem;color:var(--ink-light)">(${esc(s.translation)})</span></div>
+        ${preview ? `<div class="session-preview">${esc(preview)}</div>` : ''}
+      </div>
+      <button class="btn-delete" onclick="deleteSession(${s.id})" title="Delete">×</button>`;
+    cont.appendChild(item);
+  });
+}
+
+function deleteSession(id){ if(!confirm('Delete this study session?')) return; state.sessions=state.sessions.filter(s=>s.id!==id); renderSessions(); updateDashboard(); saveData(); showToast('Deleted'); }
+
+// ════════════════════════════════════════════════════════════
+// SERMON NOTES
+// ════════════════════════════════════════════════════════════
+function addSermon(){
+  const title = document.getElementById('serm-title')?.value.trim();
+  if(!title){ alert('Please enter a sermon title.'); return; }
+  const sermon = {
+    id: Date.now(),
+    date: document.getElementById('serm-date')?.value || new Date().toISOString().slice(0,10),
+    speaker: document.getElementById('serm-speaker')?.value.trim() || '',
+    series: document.getElementById('serm-series')?.value.trim() || '',
+    title,
+    scripture: document.getElementById('serm-scripture')?.value.trim() || '',
+    points: document.getElementById('serm-points')?.value.trim() || '',
+    application: document.getElementById('serm-application')?.value.trim() || '',
+    prayer: document.getElementById('serm-prayer')?.value.trim() || '',
+    quotes: document.getElementById('serm-quotes')?.value.trim() || '',
+    questions: document.getElementById('serm-questions')?.value.trim() || '',
+  };
+  state.sermons.unshift(sermon);
+  renderSermons(); updateDashboard(); saveData();
+  ['serm-title','serm-speaker','serm-series','serm-scripture','serm-points','serm-application','serm-prayer','serm-quotes','serm-questions'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  showToast('Sermon notes saved ✓');
+}
+
+function renderSermons(){
+  const cont = document.getElementById('sermon-list');
+  if(!cont) return;
+  setText('sermon-count', state.sermons.length);
+  const search = document.getElementById('sermon-search')?.value.toLowerCase() || '';
+  let sermons = [...state.sermons];
+  if(search) sermons = sermons.filter(s =>
+    s.title.toLowerCase().includes(search) ||
+    (s.speaker||'').toLowerCase().includes(search) ||
+    (s.scripture||'').toLowerCase().includes(search) ||
+    (s.series||'').toLowerCase().includes(search)
+  );
+  if(!sermons.length){
+    cont.innerHTML = '<div class="empty-state"><div class="empty-icon">🎙️</div><p>No sermon notes yet — save your first one above</p></div>';
+    return;
+  }
+  cont.innerHTML = '';
+  sermons.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'sermon-item';
+    item.innerHTML = `
+      <div class="sermon-header-row">
+        <div>
+          <div class="sermon-title">${esc(s.title)}</div>
+          <div class="sermon-meta">
+            <span>${s.date||'—'}</span>
+            ${s.speaker?`<span>${esc(s.speaker)}</span>`:''}
+            ${s.series?`<span>${esc(s.series)}</span>`:''}
+            ${s.scripture?`<span>${esc(s.scripture)}</span>`:''}
+          </div>
+        </div>
+        <button class="btn-delete" onclick="event.stopPropagation();deleteSermon(${s.id})" title="Delete">×</button>
+      </div>
+      <div class="sermon-expand">
+        ${s.points?`<div class="sermon-field-label">Key Points</div><div class="sermon-field-value">${esc(s.points)}</div>`:''}
+        ${s.application?`<div class="sermon-field-label">Application</div><div class="sermon-field-value">${esc(s.application)}</div>`:''}
+        ${s.prayer?`<div class="sermon-field-label">Prayer Response</div><div class="sermon-field-value">${esc(s.prayer)}</div>`:''}
+        ${s.quotes?`<div class="sermon-field-label">Quotes</div><div class="sermon-field-value">${esc(s.quotes)}</div>`:''}
+        ${s.questions?`<div class="sermon-field-label">Further Study</div><div class="sermon-field-value">${esc(s.questions)}</div>`:''}
+      </div>`;
+    item.querySelector('.sermon-header-row').onclick = () => item.classList.toggle('open');
+    cont.appendChild(item);
+  });
+}
+
+function deleteSermon(id){ if(!confirm('Delete this sermon note?')) return; state.sermons=state.sermons.filter(s=>s.id!==id); renderSermons(); updateDashboard(); saveData(); showToast('Deleted'); }
+
+// ════════════════════════════════════════════════════════════
+// PRAYER LOG
+// ════════════════════════════════════════════════════════════
+document.getElementById('prayer-status').addEventListener('change', function(){
+  const note = document.getElementById('answered-note-field');
+  if(note) note.style.display = this.value === 'answered' ? 'flex' : 'none';
+});
+
+function addPrayer(){
+  const request = document.getElementById('prayer-request')?.value.trim();
+  const person = document.getElementById('prayer-person')?.value.trim();
+  if(!person && !request){ alert('Please enter who or what you are praying for.'); return; }
+  const prayer = {
+    id: Date.now(),
+    date: document.getElementById('prayer-date')?.value || new Date().toISOString().slice(0,10),
+    person: person || 'General prayer',
+    category: document.getElementById('prayer-category')?.value || '',
+    status: document.getElementById('prayer-status')?.value || 'active',
+    request: request || '',
+    answeredNote: document.getElementById('prayer-answered-note')?.value.trim() || '',
+  };
+  state.prayers.unshift(prayer);
+  renderPrayers(); updateDashboard(); saveData();
+  ['prayer-person','prayer-request','prayer-answered-note'].forEach(id=>{ const el=document.getElementById(id); if(el)el.value=''; });
+  document.getElementById('prayer-status').value = 'active';
+  const note = document.getElementById('answered-note-field');
+  if(note) note.style.display = 'none';
+  showToast('Prayer added ✓');
+}
+
+function setPrayerTab(tab, btn){
+  currentPrayerTab = tab;
+  document.querySelectorAll('.prayer-tab-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderPrayers();
+}
+
+function markAnswered(id){
+  const p = state.prayers.find(x => x.id === id);
+  if(!p) return;
+  const note = prompt('How did God answer this prayer? (optional)');
+  if(note === null) return; // cancelled
+  p.status = 'answered';
+  p.answeredNote = note || '';
+  renderPrayers(); updateDashboard(); saveData();
+  showToast('Praise report saved ✓ 🙌');
+}
+
+function deletePrayer(id){ if(!confirm('Remove this prayer?')) return; state.prayers=state.prayers.filter(p=>p.id!==id); renderPrayers(); updateDashboard(); saveData(); showToast('Deleted'); }
+
+function renderPrayers(){
+  const cont = document.getElementById('prayer-list');
+  if(!cont) return;
+  const active = state.prayers.filter(p=>p.status==='active').length;
+  const answered = state.prayers.filter(p=>p.status==='answered').length;
+  const ongoing = state.prayers.filter(p=>p.status==='ongoing').length;
+  setText('prayer-active-count', active);
+  setText('prayer-answered-count', answered);
+  setText('prayer-ongoing-count', ongoing);
+
+  let prayers = [...state.prayers];
+  if(currentPrayerTab !== 'all') prayers = prayers.filter(p => p.status === currentPrayerTab);
+  if(!prayers.length){
+    cont.innerHTML = '<div class="empty-state"><div class="empty-icon">🙏</div><p>' + (currentPrayerTab==='all'?'No prayers logged yet — add your first prayer above':'No prayers in this category') + '</p></div>';
+    return;
+  }
+  cont.innerHTML = '';
+  prayers.forEach(p => {
+    const dotClass = {active:'dot-active',answered:'dot-answered',ongoing:'dot-ongoing'}[p.status]||'dot-active';
+    const item = document.createElement('div');
+    item.className = 'prayer-item';
+    item.innerHTML = `
+      <div class="prayer-status-dot ${dotClass}"></div>
+      <div class="prayer-body">
+        <div class="prayer-person">${esc(p.person)} ${p.category?`<span style="font-size:.74rem;font-weight:400;color:var(--ink-light)">· ${esc(p.category)}</span>`:''}</div>
+        ${p.request?`<div class="prayer-request">${esc(p.request)}</div>`:''}
+        <div class="prayer-date">${p.date||'—'} · ${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</div>
+        ${p.answeredNote?`<div class="prayer-answered-note">✓ ${esc(p.answeredNote)}</div>`:''}
+      </div>
+      <div class="prayer-actions">
+        ${p.status!=='answered'?`<button class="prayer-action-btn" onclick="markAnswered(${p.id})">Answered ✓</button>`:'<button class="prayer-action-btn answered" disabled>Answered ✓</button>'}
+        <button class="btn-delete" onclick="deletePrayer(${p.id})" title="Remove">×</button>
+      </div>`;
+    cont.appendChild(item);
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// FAVOURITE VERSES
+// ════════════════════════════════════════════════════════════
+function addVerse(){
+  const ref = document.getElementById('verse-ref')?.value.trim();
+  const text = document.getElementById('verse-text')?.value.trim();
+  if(!ref || !text){ alert('Please enter a reference and the verse text.'); return; }
+  const verse = {
+    id: Date.now(),
+    ref, text,
+    translation: document.getElementById('verse-translation')?.value || 'NIV',
+    tag: document.getElementById('verse-tag')?.value || '',
+    reflection: document.getElementById('verse-reflection')?.value.trim() || '',
+  };
+  state.verses.unshift(verse);
+  renderVerses(); updateDashboard(); saveData();
+  ['verse-ref','verse-text','verse-reflection'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('verse-tag').value = '';
+  showToast('Verse saved ✓');
+}
+
+function renderVerses(){
+  const cont = document.getElementById('verse-list');
+  if(!cont) return;
+  setText('verse-count', state.verses.length);
+  const search = document.getElementById('verse-search')?.value.toLowerCase() || '';
+  const filterTag = document.getElementById('verse-filter-tag')?.value || '';
+  let verses = [...state.verses];
+  if(filterTag) verses = verses.filter(v => v.tag === filterTag);
+  if(search) verses = verses.filter(v =>
+    v.ref.toLowerCase().includes(search) ||
+    v.text.toLowerCase().includes(search) ||
+    (v.reflection||'').toLowerCase().includes(search)
+  );
+  if(!verses.length){
+    cont.innerHTML = '<div class="empty-state"><div class="empty-icon">💛</div><p>No verses saved yet — add a favourite scripture above</p></div>';
+    return;
+  }
+  cont.innerHTML = '';
+  verses.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'verse-card';
+    card.innerHTML = `
+      <button class="btn-delete verse-delete" onclick="deleteVerse(${v.id})" title="Remove">×</button>
+      <div class="verse-reference">${esc(v.ref)} · ${esc(v.translation)}</div>
+      <div class="verse-text">"${esc(v.text)}"</div>
+      ${v.reflection?`<div class="verse-reflection">${esc(v.reflection)}</div>`:''}
+      ${v.tag?`<span class="verse-tag">${esc(v.tag)}</span>`:''}`;
+    cont.appendChild(card);
+  });
+}
+
+function deleteVerse(id){ if(!confirm('Remove this verse?')) return; state.verses=state.verses.filter(v=>v.id!==id); renderVerses(); updateDashboard(); saveData(); showToast('Deleted'); }
+
+// ════════════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════════════
+function updateDashboard(){
+  const total = totalChaptersRead();
+  const books = booksComplete();
+  const answered = state.prayers.filter(p=>p.status==='answered').length;
+  setText('dash-chapters', total.toLocaleString());
+  setText('dash-books', books);
+  setText('dash-sessions', state.sessions.length);
+  setText('dash-answered', answered);
+  setText('dash-prayers-total', state.prayers.length);
+  setText('dash-sermons', state.sermons.length);
+  setText('dash-verses', state.verses.length);
+  const bar = document.getElementById('dash-chapters-bar');
+  if(bar) bar.style.width = Math.round(total/TOTAL_CHAPTERS*100) + '%';
+  buildHeatmap();
+  buildAlerts();
+}
+
+function buildHeatmap(){
+  const cont = document.getElementById('heatmap');
+  if(!cont) return;
+  cont.innerHTML = '';
+  ALL_BOOKS.forEach(book => {
+    const read = bookReadCount(book);
+    const pct = book.c > 0 ? read/book.c : 0;
+    const level = pct === 0 ? 0 : pct < 0.33 ? 1 : pct < 0.66 ? 2 : pct < 1 ? 3 : 4;
+    const cell = document.createElement('div');
+    cell.className = `heatmap-cell ${level>0?'level-'+level:''}`;
+    cell.title = `${book.n}: ${read}/${book.c} chapters (${Math.round(pct*100)}%)`;
+    cont.appendChild(cell);
+  });
+}
+
+function buildAlerts(){
+  const grid = document.getElementById('alerts-grid');
+  if(!grid) return;
+  const alerts = [];
+  const total = totalChaptersRead();
+  const navDash = document.getElementById('nav-dashboard');
+
+  // Reading nudges
+  if(total === 0){
+    alerts.push({cls:'info',icon:'📖',title:'Start your reading journey',desc:'Open the Reading Tracker and click your first book to mark chapters as read.',action:'Go to Reading Tracker',panel:'tracker'});
+  } else if(total < 50){
+    alerts.push({cls:'info',icon:'🌱',title:`${total} chapter${total!==1?'s':''} read — great start!`,desc:'Keep going. Even one chapter a day will take you through the New Testament in under a year.',action:null});
+  }
+
+  // Sessions
+  if(!state.sessions.length){
+    alerts.push({cls:'info',icon:'✏️',title:'Log your first study session',desc:'The Study Sessions tab guides you through 8 Bible study methods — try SOAP for a great introduction.',action:'Go to Study Sessions',panel:'study'});
+  }
+
+  // Prayers
+  const active = state.prayers.filter(p=>p.status==='active').length;
+  if(active > 10){
+    alerts.push({cls:'warn',icon:'🙏',title:`${active} active prayers`,desc:'Take time to review your prayer list. Has God answered any of these? Mark them as answered.',action:'Go to Prayer Log',panel:'prayer'});
+  }
+  const unanswered = state.prayers.filter(p=>p.status==='answered').length;
+  if(unanswered > 0 && unanswered >= Math.floor(state.prayers.length * 0.5)){
+    alerts.push({cls:'success',icon:'🙌',title:`${unanswered} answered prayer${unanswered!==1?'s':''}!`,desc:'Look how faithful God has been. Take a moment to give thanks.',action:null});
+  }
+
+  // Verses
+  if(!state.verses.length){
+    alerts.push({cls:'info',icon:'💛',title:'Save your first favourite verse',desc:'Found a scripture that speaks to you? Save it in Favourite Verses with a personal reflection.',action:'Go to Favourite Verses',panel:'verses'});
+  }
+
+  // Milestones
+  const completedBooks = booksComplete();
+  if(completedBooks > 0 && completedBooks % 5 === 0){
+    alerts.push({cls:'success',icon:'🏆',title:`${completedBooks} books completed!`,desc:'What a milestone. Keep pressing on through the whole counsel of God.',action:null});
+  }
+
+  if(navDash){
+    const hasWarn = alerts.some(a=>a.cls==='warn');
+    const dot = navDash.querySelector('.alert-dot');
+    if(hasWarn && !dot){ const d=document.createElement('span');d.className='alert-dot';navDash.appendChild(d); }
+    else if(!hasWarn && dot){ dot.remove(); }
+  }
+
+  if(!alerts.length){
+    grid.innerHTML = '<div class="all-good"><div class="all-good-icon">✦</div><p>You are doing beautifully — keep seeking him with your whole heart.</p></div>';
+    return;
+  }
+  grid.innerHTML = '';
+  alerts.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'alert-card ' + a.cls;
+    card.innerHTML = `<div class="alert-icon">${a.icon}</div><div class="alert-body"><div class="alert-title">${a.title}</div><div class="alert-desc">${a.desc}</div>${a.action?`<button class="alert-action" onclick="showPanel('${a.panel}')">${a.action} →</button>`:''}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// MASTER UPDATE & INIT
+// ════════════════════════════════════════════════════════════
+function updateAll(){
+  updateDashboard();
+  updateTrackerStats();
+  renderSessions();
+  renderSermons();
+  renderPrayers();
+  renderVerses();
+}
+
+function reinit(){
+  const nameEl = document.getElementById('reader-name');
+  if(nameEl) nameEl.value = state.name || '';
+  applyTheme(state.theme || 'light');
+  updateGreeting();
+  // Set today's date on all date inputs
+  const today = new Date().toISOString().slice(0,10);
+  ['study-date','serm-date','prayer-date'].forEach(id=>{ const el=document.getElementById(id); if(el && !el.value) el.value=today; });
+  buildTracker();
+  renderMethodFields();
+  updateAll();
+}
+
+function init(){
+  loadData();
+  reinit();
+  // Method desc on load
+  const descEl = document.getElementById('method-desc');
+  if(descEl) descEl.textContent = METHOD_CONFIG[currentMethod]?.desc || '';
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ document.querySelectorAll('.modal-overlay.open,.chapter-modal-overlay.open').forEach(m=>m.classList.remove('open')); }});
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
