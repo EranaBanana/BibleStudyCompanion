@@ -84,7 +84,7 @@ h1,h2,h3{font-family:var(--font-serif)}
 /* ════════════════════════════════════════════════
    LAYOUT
 ════════════════════════════════════════════════ */
-.app-header{background:linear-gradient(135deg,#2c2416 0%,#3d3020 40%,#4a3a28 100%);color:#f5e8c8;padding:0 28px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;position:-webkit-sticky;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.app-header{background:linear-gradient(135deg,#2c2416 0%,#3d3020 40%,#4a3a28 100%);color:#f5e8c8;padding:0 28px;padding-top:env(safe-area-inset-top);height:calc(var(--nav-h) + env(safe-area-inset-top));display:flex;align-items:flex-end;padding-bottom:10px;justify-content:space-between;position:-webkit-sticky;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
 .header-brand{display:flex;align-items:center;gap:14px}
 .brand-icon{font-size:1.4rem}
 .brand-text{font-family:var(--font-serif);font-size:1.15rem;font-weight:500;letter-spacing:.02em}
@@ -100,7 +100,7 @@ h1,h2,h3{font-family:var(--font-serif)}
 /* ════════════════════════════════════════════════
    NAV
 ════════════════════════════════════════════════ */
-.nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:-webkit-sticky;position:sticky;top:var(--nav-h);z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
+.nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:-webkit-sticky;position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top));z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
 .nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 20px;-webkit-overflow-scrolling:touch}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{background:none;border:none;border-bottom:3px solid transparent;padding:14px 18px;font-size:.82rem;font-weight:500;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .18s;position:relative}
@@ -1841,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 <div id="welcome-screen">
   <div class="ws-cross">✝</div>
-  <div class="ws-subtitle">Erana Banana · Your Private Journal</div>
+  <div class="ws-subtitle">Your Private Scripture Journal</div>
   <h1 class="ws-title">The Scripture Journal</h1>
   <div class="ws-gold-line"></div>
   <p class="ws-desc">A beautiful, private place to track your Bible reading, study sessions, prayers, and the verses that speak to your heart.</p>
@@ -1862,23 +1862,23 @@ document.addEventListener('DOMContentLoaded', init);
 
     <!-- iOS manual steps — shown only on iPhone/iPad -->
     <div class="ws-ios-steps" id="ws-ios-steps">
-      <div class="ws-ios-steps-title">How to add to your iPhone</div>
+      <div class="ws-ios-steps-title">Two quick steps to save your icon</div>
       <div class="ws-ios-step">
         <div class="ws-ios-num">1</div>
-        <div class="ws-ios-text">Tap the <span class="key">⬆ Share</span> button at the bottom of Safari</div>
+        <div class="ws-ios-text">Tap the <span class="key">⬆ Share</span> icon at the <strong>bottom</strong> of your Safari browser</div>
       </div>
       <div class="ws-ios-step">
         <div class="ws-ios-num">2</div>
-        <div class="ws-ios-text">Scroll down and tap <span class="key">Add to Home Screen</span></div>
+        <div class="ws-ios-text">Scroll down and tap <span class="key">Add to Home Screen</span>, then tap <span class="key">Add</span></div>
       </div>
       <div class="ws-ios-step">
-        <div class="ws-ios-num">3</div>
-        <div class="ws-ios-text">Tap <span class="key">Add</span> in the top right — done! The app icon appears on your home screen.</div>
+        <div class="ws-ios-num">✓</div>
+        <div class="ws-ios-text">The journal icon appears on your home screen — tap it any time to open your journal!</div>
       </div>
     </div>
   </div>
 
-  <button class="ws-skip" id="ws-skip">I already have the icon — open the journal</button>
+  <button class="ws-skip" id="ws-skip">No thanks, I'd like to use it in the browser</button>
 </div>
 
 <script>
