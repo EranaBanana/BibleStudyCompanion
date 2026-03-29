@@ -84,7 +84,7 @@ h1,h2,h3{font-family:var(--font-serif)}
 /* ════════════════════════════════════════════════
    LAYOUT
 ════════════════════════════════════════════════ */
-.app-header{background:linear-gradient(135deg,#2c2416 0%,#3d3020 40%,#4a3a28 100%);color:#f5e8c8;padding:0 28px;padding-top:env(safe-area-inset-top);height:calc(var(--nav-h) + env(safe-area-inset-top));display:flex;align-items:flex-end;padding-bottom:10px;justify-content:space-between;position:-webkit-sticky;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.app-header{background:linear-gradient(135deg,#2c2416 0%,#3d3020 40%,#4a3a28 100%);color:#f5e8c8;padding-left:28px;padding-right:28px;padding-top:max(16px, env(safe-area-inset-top));padding-bottom:14px;min-height:calc(var(--nav-h) + env(safe-area-inset-top));display:flex;align-items:flex-end;justify-content:space-between;position:-webkit-sticky;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3)}
 .header-brand{display:flex;align-items:center;gap:14px}
 .brand-icon{font-size:1.4rem}
 .brand-text{font-family:var(--font-serif);font-size:1.15rem;font-weight:500;letter-spacing:.02em}
@@ -100,7 +100,7 @@ h1,h2,h3{font-family:var(--font-serif)}
 /* ════════════════════════════════════════════════
    NAV
 ════════════════════════════════════════════════ */
-.nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:-webkit-sticky;position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top));z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
+.nav-wrapper{background:var(--cream);border-bottom:1px solid rgba(44,36,22,.1);position:-webkit-sticky;position:sticky;top:0;z-index:99;box-shadow:0 1px 8px rgba(44,36,22,.06)}
 .nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding:0 20px;-webkit-overflow-scrolling:touch}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{background:none;border:none;border-bottom:3px solid transparent;padding:14px 18px;font-size:.82rem;font-weight:500;color:var(--ink-soft);letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:all .18s;position:relative}
@@ -361,15 +361,13 @@ main{max-width:1180px;margin:0 auto;padding:32px 24px calc(80px + env(safe-area-
 @media(max-width:640px){
 
   /* ── Header ── */
-  .app-header{padding:0 14px;height:auto;min-height:54px;flex-wrap:wrap;gap:8px;padding-top:10px;padding-bottom:10px}
+  .app-header{padding-left:14px;padding-right:14px;padding-top:max(14px,env(safe-area-inset-top));padding-bottom:12px;min-height:auto;flex-wrap:wrap;gap:8px;}
   .brand-text{font-size:1rem}
   .brand-sub{display:none}
   .header-name-input{width:110px;font-size:.78rem}
   .theme-btn{font-size:.7rem;padding:4px 8px}
   #theme-label{display:none} /* show icon only on phone */
 
-  /* ── Nav tabs — scrollable, icon + short label ── */
-  .nav-wrapper{top:54px} /* adjust sticky offset to match compressed header */
   .nav-tabs{padding:0 8px;gap:0}
   .nav-tab{padding:12px 11px;font-size:.74rem;gap:4px;letter-spacing:0}
   .tab-icon{font-size:.9rem}
